@@ -20,9 +20,12 @@
         </thead>
         @foreach($jeux as $jeu)
             <tr>
-                @foreach($jeu as $elt)
-                    <td>{{$elt}}</td>
-                @endforeach
+                <td>{{$jeu->id}}</td>
+                <td>{{$jeu->nom}}</td>
+                <td>{{$jeu->annee_sortie}}</td>
+                <td>{{$jeu->age_min}}</td>
+                <td>{{$jeu->categorie}}</td>
+                <td>{{$jeu->description}}</td>
             </tr>
         @endforeach
     </table>

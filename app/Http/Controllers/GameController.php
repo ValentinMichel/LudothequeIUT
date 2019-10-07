@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Models\Jeux;
 use Illuminate\Http\Request;
 
 class GameController extends Controller
 {
     public function index() {
+        /*
         $jeux = array (
             0 =>
                 array (
@@ -54,6 +56,8 @@ class GameController extends Controller
                     'description' => 'Jeu Far Wast immersif avec un Online et un mode histoire complet.',
                 ),
         );
+        */
+        $jeux = Jeux::all();
         return view('jeux.index', ['jeux' => $jeux]);
     }
 }
