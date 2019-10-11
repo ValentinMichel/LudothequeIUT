@@ -16,4 +16,5 @@ Route::get('/', function () {
 });
 
 
-Route::get('/jeux', 'GameController@index')->name('jeux.index');
+Route::get('/jeux', 'GameControllerOld@index')->name('jeux.index');
+Route::resource('jeux', 'GameController');

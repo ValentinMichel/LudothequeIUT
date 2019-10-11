@@ -5,32 +5,34 @@
     <title>Liste des jeux</title>
 </head>
 <body>
-<h2 style="text-align: center; width: 100%;">La liste des jeux</h2>
+<h2 style="text-align: center; width: 100%; margin-top: 2%; text-transform: uppercase;">La liste des jeux</h2>
 @if(!empty($jeux))
     <table class="table table-striped table-hover table-bordered table-responsive" style="margin-left: auto; margin-right: auto; width: 80%;">
         <thead class="">
         <tr>
             <td scope="col">#</td>
-            <td scope="col">Title</td>
+            <td scope="col" style="width: 200px;">Title</td>
             <td scope="col">Year</td>
-            <td scope="col">Recommanded Age</td>
+            <td scope="col">Age</td>
             <td scope="col">Type</td>
             <td scope="col">Description</td>
+            <td scope="col" style="width: 115px;">Fiche du jeu</td>
         </tr>
         </thead>
         @foreach($jeux as $jeu)
             <tr>
                 <td>{{$jeu->id}}</td>
-                <td>{{$jeu->nom}}</td>
+                <td>{{$jeu->title}}</td>
                 <td>{{$jeu->annee_sortie}}</td>
                 <td>{{$jeu->age_min}}</td>
                 <td>{{$jeu->categorie}}</td>
                 <td>{{$jeu->description}}</td>
+                <td><a href="{{route('jeux.show', $jeu->id)}}">Voir la fiche</a></td>
             </tr>
         @endforeach
     </table>
 @else
-    <h3>Aucun jeu</h3>
+    <h3>Aucun jeu répertorié</h3>
     @endif
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
