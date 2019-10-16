@@ -82,7 +82,7 @@
             <i class="fas fa-exclamation-triangle" style="padding: 8px;"></i>
         </div>
         <div style="padding: 2%;">
-            <span style="text-align: center; color: rgba(248, 43, 13, 0.7); font-weight: bold;">Following error must be corrected...</span>
+            <span style="text-align: center; color: rgba(248, 43, 13, 0.7); font-weight: bold;">The following error(s) must be corrected...</span>
             <ul>
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
