@@ -20,3 +20,6 @@ Route::get('/jeux', 'GameControllerOld@index')->name('jeux.index');
 Route::resource('jeux', 'GameController');
 Route::resource('comments', 'CommentaireController');
 Route::resource('tags', 'TagController');
+Route::get('accueil', function () {
+    echo "coucou";
+});
