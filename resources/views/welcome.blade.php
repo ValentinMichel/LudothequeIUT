@@ -87,6 +87,7 @@
                 <div class="links">
                     <a href="{{route('jeux.index')}}">Liste des jeux</a>
                     <a href="{{route('comments.index')}}">Liste des commentaires</a>
+                    <a href="{{route('tags.index')}}">Liste des tags</a>
                 </div>
             </div>
         </div>

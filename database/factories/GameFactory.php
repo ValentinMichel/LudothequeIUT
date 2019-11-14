@@ -9,7 +9,7 @@ $factory->define(
         return [
             'title' => $faker->unique()->randomElement($titre),
             'annee_sortie' => $faker->year,
-            'description' => $faker->paragraph,
+            'description' => $faker->text,
             'age_min' => $faker->randomElement($array = array('14+', '16+', '18+')),
             'categorie' => $faker->randomElement($array = array('FPS', 'Open World', 'RPG', 'MMORPG', 'BattleRoyal')),
         ];
