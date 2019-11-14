@@ -18,3 +18,5 @@ Route::get('/', function () {
 
 Route::get('/jeux', 'GameControllerOld@index')->name('jeux.index');
 Route::resource('jeux', 'GameController');
+Route::resource('comments', 'CommentaireController');
+Route::resource('tags', 'TagController');

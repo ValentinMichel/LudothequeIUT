@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Models\Jeux;
+use App\Models\Jeux;
 use Illuminate\Http\Request;
 
 class GameController extends Controller
@@ -28,12 +28,7 @@ class GameController extends Controller
         return view('jeux.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         // validation des données de la requête
@@ -70,8 +65,9 @@ class GameController extends Controller
         return view('jeux.show', ['jeu' => $jeu]);*/
         $action = $request->query('action', 'show');
         $jeu = Jeux::find($id);
+        $tags = Jeux::find($id)->tags()->get();
 
-        return view('jeux.show', ['jeu' => $jeu, 'action' => $action]);
+        return view('jeux.show', ['jeu' => $jeu, 'action' => $action, 'tags' => $tags]);
     }
 
     /**
@@ -86,13 +82,7 @@ class GameController extends Controller
         return view('jeux.edit', ['jeu' => $jeu]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
         $jeu = Jeux::find($id);

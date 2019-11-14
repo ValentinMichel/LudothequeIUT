@@ -2,7 +2,10 @@
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <title>Création de jeu</title>
+    <?php
+        $jeu = \Illuminate\Support\Facades\DB::table('jeux')->where('id', $_GET['id'])->get();
+    ?>
+    <title>Ajouter un commentaire sur {{$jeu[0]->title}}</title>
     <style>
         .formulaire{
             margin-top: 2%;
@@ -26,52 +29,34 @@
 
 
 <div class="formulaire">
-    <form action="{{route('jeux.store')}}" method="POST" style="">
+    <form action="{{route('comments.store')}}" method="POST" style="">
         {!! csrf_field() !!}
         <div class="text-center">
-            <h3>Création d'un jeu</h3>
+            <h3>Ajouter un commentaire sur {{$jeu[0]->title}}</h3>
             <hr class="mt-2 mb-2">
         </div>
         <div class="row">
+            <input type="hidden" name="id" id="id" value="{{$jeu[0]->id}}" required>
             <div class="form-group col-md-4">
-                <label for="title"><strong>Titre du jeu</strong></label>
+                <label for="title"><strong>Titre du commentaire</strong></label>
                 <input type="text" class="form-control" name="title" id="title" value="{{ old('title') }}" style="text-align: center; font-weight: bold;">
             </div>
             <div class="form-group col-md-4">
-                <label for="year"><strong>Année de sortie</strong></label>
-                <input type="number" class="form-control" name="year" id="year" value="{{ old('year') }}" style="text-align: center; font-weight: bold;">
-            </div>
-            <div class="form-group col-md-4">
-                {{-- la catégorie  --}}
-                <label for="categorie"><strong>Catégorie</strong></label>
-                <select class="form-control" id="categorie"  name="categorie" style="text-align: center; font-weight: bold;">
-                    <option>{{ old('categorie') }}</option>
-                    <option>RPG</option>
-                    <option>BattleRoyal</option>
-                    <option>Open World</option>
-                    <option>MMORPG</option>
-                    <option>FPS</option>
-                </select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-md-4">
-                {{-- la date d'expiration  --}}
-                <label for="age_min"><strong>Âge minimum</strong></label>
-                <input type="text" class="form-control" name="age_min" id="age_min" value="{{ old('age_min') }}" style="text-align: center; font-weight: bold;">
+                <label for="auteur"><strong>Auteur</strong></label>
+                <input type="text" class="form-control" name="auteur" id="auteur" value="{{ old('auteur') }}" style="text-align: center; font-weight: bold;">
             </div>
         </div>
         <div class="row">
             <div class="form-group col-md-12">
-                <label for="textarea-input"><strong>Description</strong></label>
-                <textarea name="description" id="description" rows="4" class="form-control"
-                          placeholder="Description..." style="font-weight: bold;">{{ old('description') }}</textarea>
+                <label for="textarea-input"><strong>Commentaire</strong></label>
+                <textarea name="commentaire" id="commentaire" rows="4" class="form-control"
+                          placeholder="Description..." style="font-weight: bold;">{{ old('commentaire') }}</textarea>
             </div>
         </div>
         <div class="row" style="display: block;">
             <button class="btn btn-success col-md-2" type="submit" style="margin-left: 33%;">Valider la création</button>
-            <a href="{{route('jeux.index')}}"  style="margin-right: 33%;">
-            <input class="btn btn-danger" type="button" value="Annuler la création">
+            <a href="{{route('jeux.show', $jeu[0]->id)}}"  style="margin-right: 33%;">
+                <input class="btn btn-danger" type="button" value="Annuler la création">
             </a>
         </div>
     </form>

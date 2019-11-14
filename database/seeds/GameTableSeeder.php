@@ -10,6 +10,6 @@ class GameTableSeeder  extends Seeder {
 
     public function run()
     {
-        factory(\App\Http\Models\Jeux::class, 20)->create();
+        factory(\App\Models\Jeux::class, 20)->create();
     }
 }

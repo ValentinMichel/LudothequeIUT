@@ -7,6 +7,9 @@
         a:hover{
             text-decoration: none;
         }
+        .backToPage{
+            text-align: center;
+        }
     </style>
 </head>
 <body>

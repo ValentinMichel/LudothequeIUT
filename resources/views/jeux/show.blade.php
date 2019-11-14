@@ -42,6 +42,14 @@
         <td class="td-title">Description</td>
         <td>{{$jeu->description}}</td>
     </tr>
+    <tr>
+        <td class="td-title">Tags</td>
+        <td>
+        @foreach($tags as $tag)
+            <span style="border: 1px solid rgba(0,0,0,0.1); border-radius: 5px; padding: 5px;">{{$tag->label}}</span>
+        @endforeach
+        </td>
+    </tr>
 </table>
 </div>
 <div class="backToPage">
@@ -57,7 +65,8 @@
         </form>
     @else
         <a href="{{route('jeux.index')}}"><button class="btn btn-info">Retour à la liste des jeux</button></a>
-        <a href="{{route('jeux.edit', $jeu->id)}}"><button class="btn btn-primary">Modifier le jeu</button></a>
+        <a href="{{route('comments.show', $jeu->id)}}"><button class="btn btn-primary">Voir les commentaires</button></a>
+        <a href="{{route('jeux.edit', $jeu->id)}}"><button class="btn btn-warning" style="color: darkslategray;">Modifier le jeu</button></a>
         <a href="{{url(route('jeux.show', $jeu->id)) . '?' . http_build_query(['action' => 'delete'])}}"><button class="btn btn-danger">Supprimer le jeu</button></a>
     @endif
 </div>
