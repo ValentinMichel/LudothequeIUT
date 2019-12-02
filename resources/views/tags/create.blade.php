@@ -1,8 +1,5 @@
 @extends("layout.master")
-@php
-    $jeu = \Illuminate\Support\Facades\DB::table('jeux')->where('id', $_GET['id'])->get();
-@endphp
-@section("title", "{$jeu[0]->title}")
+@section("title", "Ajouter un tag")
 @section("content")
 <style>
     .formulaire{
@@ -23,33 +20,21 @@
 </style>
 
 <div class="formulaire">
-    <form action="{{route('comments.store')}}" method="POST" style="">
+    <form action="{{route('tags.store')}}" method="POST">
         {!! csrf_field() !!}
         <div class="text-center">
-            <h3>Ajouter un commentaire sur {{$jeu[0]->title}}</h3>
+            <h3>Ajouter un tag</h3>
             <hr class="mt-2 mb-2">
         </div>
         <div class="row">
-            <input type="hidden" name="id" id="id" value="{{$jeu[0]->id}}" required>
             <div class="form-group col-md-4">
-                <label for="title"><strong>Titre du commentaire</strong></label>
+                <label for="title"><strong>Titre du tag</strong></label>
                 <input type="text" class="form-control" name="title" id="title" value="{{ old('title') }}" style="text-align: center; font-weight: bold;">
-            </div>
-            <div class="form-group col-md-4">
-                <label for="auteur"><strong>Auteur</strong></label>
-                <input type="text" class="form-control" name="auteur" id="auteur" value="{{ old('auteur') }}" style="text-align: center; font-weight: bold;">
-            </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-md-12">
-                <label for="textarea-input"><strong>Commentaire</strong></label>
-                <textarea name="commentaire" id="commentaire" rows="4" class="form-control"
-                          placeholder="Description..." style="font-weight: bold;">{{ old('commentaire') }}</textarea>
             </div>
         </div>
         <div class="row" style="display: block;">
             <button class="btn btn-success col-md-2" type="submit" style="margin-left: 33%;">Valider la création</button>
-            <a href="/jeux/{{$jeu[0]->id}}"  style="margin-right: 33%;">
+            <a href="/tags"  style="margin-right: 33%;">
                 <input class="btn btn-danger" type="button" value="Annuler la création">
             </a>
         </div>

@@ -25,7 +25,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
+        return view('tags.create');
     }
 
     /**
@@ -36,7 +36,16 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate(
+            $request,
+            [
+                'title' => 'required',
+            ]
+        );
+        $tag = new Tag();
+        $tag->label = $request->title;
+        $tag->save();
+        return redirect('/tags');
     }
 
     /**
@@ -79,8 +88,13 @@ class TagController extends Controller
      * @param  \App\Models\Tag  $personne
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tag $personne)
+    public function destroy(Request $request, $id)
     {
-        //
+        if ($request->delete == 'valide') {
+            $tag = Tag::find($id);
+            $tag->delete();
+        }
+        return redirect()->route('tags.index');
     }
+
 }

@@ -1,20 +1,17 @@
+@extends("layout.master")
+@section('title', "{$jeu->title}")
+@section("content")
+<style>
+    .td-title{
+        font-weight: bold;
+    }
+    .backToPage{
+        text-align: center;
+    }
+</style>
 
-<html>
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>{{$jeu->title}}</title>
-    <style>
-        .td-title{
-            font-weight: bold;
-        }
-        .backToPage{
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
 <div>
-<table class="table table-striped table-hover table-bordered" style="margin-left: auto; margin-right: auto; width: 80%; margin-top: 5%;">
+<table class="table table-striped table-hover table-bordered" style="margin-left: auto; margin-right: auto; width: 100%; margin-top: 5%;">
     <thead>
     <tr>
         <td colspan="2" style="text-align: center; font-size: larger; font-family: 'Trebuchet MS;',sans-serif">
@@ -64,15 +61,12 @@
             </div>
         </form>
     @else
-        <a href="{{route('jeux.index')}}"><button class="btn btn-info">Retour à la liste des jeux</button></a>
+        <a href="/jeux"><button class="btn btn-info">Retour à la liste des jeux</button></a>
         <a href="{{route('comments.show', $jeu->id)}}"><button class="btn btn-primary">Voir les commentaires</button></a>
-        <a href="{{route('jeux.edit', $jeu->id)}}"><button class="btn btn-warning" style="color: darkslategray;">Modifier le jeu</button></a>
-        <a href="{{url(route('jeux.show', $jeu->id)) . '?' . http_build_query(['action' => 'delete'])}}"><button class="btn btn-danger">Supprimer le jeu</button></a>
+        <a href="/jeux/{{$jeu->id}}/edit"><button class="btn btn-warning" style="color: darkslategray;">Modifier le jeu</button></a>
+        <a href="/jeux/{{$jeu->id}}?action=delete"><button class="btn btn-danger">Supprimer le jeu</button></a>
+        <!--<a href="{{url(route('jeux.show', $jeu->id)) . '?' . http_build_query(['action' => 'delete'])}}"><button class="btn btn-danger">Supprimer le jeu</button></a>-->
     @endif
 </div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-</body>
-</html>
 
+@endsection

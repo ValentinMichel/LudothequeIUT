@@ -19,7 +19,8 @@ class CreateCommentairesTable extends Migration
             $table->string('body');
             $table->string('auteur');
             $table->bigInteger('jeux_id')->unsigned();
-            $table->foreign('jeux_id')->references('id')->on('jeux');
+            $table->foreign('jeux_id')->references('id')->on('jeux')
+                ->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

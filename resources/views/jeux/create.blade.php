@@ -1,29 +1,23 @@
-<html>
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <title>Création de jeu</title>
-    <style>
-        .formulaire{
-            margin-top: 2%;
-            margin-bottom: 2%;
-            width: 75%;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .formulaire>form{
-            border: 1px solid rgba(0, 0, 0, 0.2) !important;
-            border-radius: 5px !important;
-            background-color: whitesmoke;
-            padding: 3%;
-        }
-        a:hover{
-            text-decoration: none;
-        }
-    </style>
-</head>
-<body>
-
+@extends("layout.master")
+@section("title", "Création de jeu")
+@section("content")
+<style>
+    .formulaire{
+        margin-top: 2%;
+        margin-bottom: 2%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .formulaire>form{
+        border: 1px solid rgba(0, 0, 0, 0.2) !important;
+        border-radius: 5px !important;
+        background-color: whitesmoke;
+        padding: 3%;
+    }
+    a:hover{
+        text-decoration: none;
+    }
+</style>
 
 <div class="formulaire">
     <form action="{{route('jeux.store')}}" method="POST" style="">
@@ -56,9 +50,20 @@
         </div>
         <div class="row">
             <div class="form-group col-md-4">
-                {{-- la date d'expiration  --}}
                 <label for="age_min"><strong>Âge minimum</strong></label>
                 <input type="text" class="form-control" name="age_min" id="age_min" value="{{ old('age_min') }}" style="text-align: center; font-weight: bold;">
+            </div>
+            <div class="form-group col-md-4">
+                <label><strong>Tags</strong></label>
+                <select class="form-control" multiple="multiple" name="tags[]" style="font-weight: bold;">
+                    @php
+                        if(!is_null(old('tags'))) $tab = old('tags');
+                        foreach ($tags as $tag){
+                            //echo "<option value=".$tag->id.">".$tag->label."</option>";
+                            echo "<option value='".$tag->id."'".(isset($tab) ? (in_array($tag->id, $tab) ? "selected" : "") : "").">".$tag->label."</option>";
+                        }
+                    @endphp
+                </select>
             </div>
         </div>
         <div class="row">
@@ -70,7 +75,7 @@
         </div>
         <div class="row" style="display: block;">
             <button class="btn btn-success col-md-2" type="submit" style="margin-left: 33%;">Valider la création</button>
-            <a href="{{route('jeux.index')}}"  style="margin-right: 33%;">
+            <a href="/jeux"  style="margin-right: 33%;">
             <input class="btn btn-danger" type="button" value="Annuler la création">
             </a>
         </div>
@@ -91,8 +96,4 @@
         </div>
     </div>
 @endif
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-</body>
-</html>
+@endsection

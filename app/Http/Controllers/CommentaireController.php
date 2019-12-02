@@ -98,8 +98,18 @@ class CommentaireController extends Controller
      * @param  \App\Models\Commentaire  $commentaire
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Commentaire $commentaire)
+    public function destroy(Request $request, $id)
     {
-        //
+        if ($request->delete == 'valideFromIndex') {
+            $comment = Commentaire::find($id);
+            $comment->delete();
+            return redirect()->route('comments.index');
+        }
+        else if($request->delete == 'valideFromShow'){
+            $comment = Commentaire::find($id);
+            $comment->delete();
+            return redirect()->back();
+        }
     }
+
 }

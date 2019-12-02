@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Jeux;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class GameController extends Controller
@@ -25,7 +26,8 @@ class GameController extends Controller
      */
     public function create()
     {
-        return view('jeux.create');
+        $tags = Tag::all();
+        return view('jeux.create', ['tags' => $tags]);
     }
 
 
@@ -50,6 +52,9 @@ class GameController extends Controller
         $jeu->description = $request->description;
         $jeu->age_min = $request->age_min;
         $jeu->save();
+        foreach ($request->tags as $tag){
+            $jeu->tags()->attach($tag);
+        }
         return redirect('/jeux');
     }
 
@@ -64,7 +69,7 @@ class GameController extends Controller
         /*$jeu = Jeux::find($id);
         return view('jeux.show', ['jeu' => $jeu]);*/
         $action = $request->query('action', 'show');
-        $jeu = Jeux::find($id);
+        $jeu = Jeux::findOrFail($id); // findOrFail : si non trouvé, renvoi une erreur 404 Not Found.
         $tags = Jeux::find($id)->tags()->get();
 
         return view('jeux.show', ['jeu' => $jeu, 'action' => $action, 'tags' => $tags]);
@@ -78,8 +83,11 @@ class GameController extends Controller
      */
     public function edit($id)
     {
-        $jeu = Jeux::find($id);
-        return view('jeux.edit', ['jeu' => $jeu]);
+        $jeu = Jeux::findOrFail($id);
+        //$currentTags = $jeu->tags()->get()->toArray();
+        $currentTags = $jeu->tags()->pluck('label')->toArray();
+        $tags = Tag::all();
+        return view('jeux.edit', ['jeu' => $jeu, 'currentTags' => $currentTags, 'tags' => $tags]);
     }
 
 
@@ -103,7 +111,18 @@ class GameController extends Controller
         $jeu->description = $request->description;
         $jeu->age_min = $request->age_min;
         $jeu->save();
-        return redirect('/jeux');
+        $tags = $jeu->tags()->pluck('id')->toArray();
+        foreach ($request->tags as $tag){
+            if(!in_array($tag, $tags)){
+                $jeu->tags()->attach($tag);
+            }
+        }
+        foreach ($tags as $tag){
+            if(!in_array($tag, $request->tags)){
+                $jeu->tags()->detach($tag);
+            }
+        }
+        return redirect('/jeux/'.$id);
     }
 
     /**
@@ -120,4 +139,5 @@ class GameController extends Controller
         }
         return redirect()->route('jeux.index');
     }
+
 }

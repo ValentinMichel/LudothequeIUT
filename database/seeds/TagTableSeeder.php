@@ -8,11 +8,6 @@ class TagTableSeeder extends Seeder
         $jeux = \App\Models\Jeux::all();
         foreach ($jeux as $jeu){
             $jeu->tags()->attach(rand(1,6));
-            if($jeu->id % 2 == 0) {
-                $jeu->tags()->attach(rand(1,6));
-                $jeu->tags()->attach(rand(1,6));
-            }
-            $jeu->tags()->attach(rand(1,6));
         }
     }
 }

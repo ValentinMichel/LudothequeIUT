@@ -1,21 +1,14 @@
-
-<html>
-<head>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>Liste des jeux</title>
-    <style>
-        a:hover{
-            text-decoration: none;
-        }
-        .backToPage{
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
+@extends('layout.master')
+@section('title', 'Liste des jeux')
+@section('content')
+<style>
+    a:hover{
+        text-decoration: none;
+    }
+</style>
 <h2 style="text-align: center; width: 100%; margin-top: 2%; text-transform: uppercase;">La liste des jeux</h2>
 @if(!empty($jeux))
-    <table class="table table-striped table-hover table-bordered table-responsive" style="margin-left: auto; margin-right: auto; width: 80%;">
+    <table class="table table-striped table-hover table-bordered table-responsive" style="margin-left: auto; margin-right: auto; width: 100%;">
         <thead class="">
         <tr>
             <td scope="col">#</td>
@@ -35,23 +28,25 @@
                 <td>{{$jeu->age_min}}</td>
                 <td>{{$jeu->categorie}}</td>
                 <td>{{$jeu->description}}</td>
-                <td><a href="{{route('jeux.show', $jeu->id)}}">Voir la fiche</a></td>
+                <!--<td><a href="{{route('jeux.show', $jeu->id)}}">Voir la fiche</a></td>-->
+                <td><a href="/jeux/{{$jeu->id}}">Voir la fiche</a></td>
             </tr>
         @endforeach
     </table>
 @else
     <h3>Aucun jeu répertorié</h3>
     @endif
-<div class="add" style="margin-bottom: 3%;">
-    <a href="{{route('jeux.create')}}">
-        <button class="btn btn-success" type="button" style="display: block; margin: auto; color: whitesmoke; text-decoration: none;">
+<div class="row" style="display: block; margin: auto; margin-bottom: 3%; text-align: center;">
+    <a href="/jeux/create">
+        <button class="btn btn-success" type="button" style="display: inline; color: whitesmoke; text-decoration: none;">
             Créer un jeu
         </button>
     </a>
+    <a href="/">
+        <button class="btn btn-info" type="button" style="display: inline; color: whitesmoke; text-decoration: none;">
+            Accueil
+        </button>
+    </a>
 </div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-</body>
-</html>
+@endsection
 
