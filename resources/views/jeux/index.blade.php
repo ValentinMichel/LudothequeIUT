@@ -5,9 +5,26 @@
     a:hover{
         text-decoration: none;
     }
+    .header-select{
+        background-color: whitesmoke;
+        color: rgba(0,0,0,0.6);
+        border: 1px solid rgba(0,0,0,0.2);
+        border-radius: 4px;
+        padding: 1%;
+        width: 40%;
+    }
 </style>
 <h2 style="text-align: center; width: 100%; margin-top: 2%; text-transform: uppercase;">La liste des jeux</h2>
 @if(!empty($jeux))
+    <form action="/jeux" method="get" class="header-select">
+        <select class="form-control col-md-7" name="categorie" style="display: inline;">
+            <option value="All" @if($type == 'All') selected @endif>Tous les types</option>
+            @foreach($categories as $categorie)
+                <option value="{{$categorie}}" @if($type == $categorie) selected @endif>{{$categorie}}</option>
+            @endforeach
+        </select>
+        <input type="submit" class="btn btn-primary" value="Rechercher" style="display: inline; float: right">
+    </form>
     <table class="table table-striped table-hover table-bordered table-responsive" style="margin-left: auto; margin-right: auto; width: 100%;">
         <thead class="">
         <tr>

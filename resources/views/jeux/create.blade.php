@@ -18,9 +18,8 @@
         text-decoration: none;
     }
 </style>
-
 <div class="formulaire">
-    <form action="{{route('jeux.store')}}" method="POST" style="">
+    <form action="{{route('jeux.store')}}" method="POST" enctype="multipart/form-data">
         {!! csrf_field() !!}
         <div class="text-center">
             <h3>Création d'un jeu</h3>
@@ -49,34 +48,50 @@
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-4">
-                <label for="age_min"><strong>Âge minimum</strong></label>
-                <input type="text" class="form-control" name="age_min" id="age_min" value="{{ old('age_min') }}" style="text-align: center; font-weight: bold;">
+            <div class="input-group col-md-4">
+                <input type="text" class="form-control" name="age_min" id="age_min" value="{{ old('age_min') }}" style="text-align: center; font-weight: bold;" placeholder="Âge minimum">
             </div>
-            <div class="form-group col-md-4">
-                <label><strong>Tags</strong></label>
-                <select class="form-control" multiple="multiple" name="tags[]" style="font-weight: bold;">
-                    @php
-                        if(!is_null(old('tags'))) $tab = old('tags');
-                        foreach ($tags as $tag){
-                            //echo "<option value=".$tag->id.">".$tag->label."</option>";
-                            echo "<option value='".$tag->id."'".(isset($tab) ? (in_array($tag->id, $tab) ? "selected" : "") : "").">".$tag->label."</option>";
-                        }
-                    @endphp
-                </select>
+            <div class="input-group col-md-6">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupFileAddon01">Image du jeu</span>
+                </div>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="inputGroupFile01"
+                           aria-describedby="inputGroupFileAddon01" name="image">
+                    <label class="custom-file-label" for="inputGroupFile01">Choisir une image</label>
+                </div>
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-12">
+            <div class="form-group col-md-8">
                 <label for="textarea-input"><strong>Description</strong></label>
                 <textarea name="description" id="description" rows="4" class="form-control"
                           placeholder="Description..." style="font-weight: bold;">{{ old('description') }}</textarea>
             </div>
+            <div class="form-group col-md-4">
+                <label><strong>Tags</strong></label>
+                <select class="form-control" multiple="multiple" name="tags[]" style="font-weight: bold;">
+                    @php/*
+                        if(!is_null(old('tags'))) $tab = old('tags');
+                        foreach ($tags as $tag){
+                            echo "<option value='".$tag->id."'".(isset($tab) ? (in_array($tag->id, $tab) ? "selected" : "") : "").">".$tag->label."</option>";
+                        }*/
+                    @endphp
+                    @foreach($tags as $tag)
+                        <option value="{{$tag->id}}" @if(!is_null(old('tags')) && in_array($tag->id, old('tags'))) selected @endif>{{$tag->label}}</option>
+                    @endforeach
+                </select>
+            </div>
         </div>
-        <div class="row" style="display: block;">
-            <button class="btn btn-success col-md-2" type="submit" style="margin-left: 33%;">Valider la création</button>
-            <a href="/jeux"  style="margin-right: 33%;">
-            <input class="btn btn-danger" type="button" value="Annuler la création">
+
+        <div class="row" style="display: block; margin: auto; text-align: center;">
+            <button class="btn btn-success" type="submit" style="display: inline; color: whitesmoke; text-decoration: none;">
+                Valider la création
+            </button>
+            <a href="/jeux">
+                <button class="btn btn-danger" type="button" style="display: inline; color: whitesmoke; text-decoration: none;">
+                    Annuler la création
+                </button>
             </a>
         </div>
     </form>

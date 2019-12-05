@@ -84,10 +84,14 @@
                               placeholder="Ecrivez votre message..." style="font-weight: bold;">{{ old('content') }}</textarea>
                 </div>
             </div>
-            <div class="row" style="display: block;">
-                <button class="btn btn-success col-md-2" type="submit" style="margin-left: 33%;">Envoyer le message</button>
-                <a href="/"  style="margin-right: 33%;">
-                    <input class="btn btn-danger" type="button" value="Retour sur interface">
+            <div class="row" style="display: block; margin: auto; text-align: center;">
+                <button class="btn btn-success" type="submit" style="display: inline; color: whitesmoke; text-decoration: none;">
+                    Envoyer le message
+                </button>
+                <a href="/">
+                    <button class="btn btn-danger" type="button" style="display: inline; color: whitesmoke; text-decoration: none;">
+                        Retour
+                    </button>
                 </a>
             </div>
         </form>

@@ -11,7 +11,7 @@
 </style>
 
 <div>
-<table class="table table-striped table-hover table-bordered" style="margin-left: auto; margin-right: auto; width: 100%; margin-top: 5%;">
+<table class="table table-striped table-hover table-bordered" style="margin-left: auto; margin-right: auto; width: 100%; margin-top: 3%;">
     <thead>
     <tr>
         <td colspan="2" style="text-align: center; font-size: larger; font-family: 'Trebuchet MS;',sans-serif">
@@ -19,6 +19,11 @@
         </td>
     </tr>
     </thead>
+    @if($jeu->image !== null)
+    <tr>
+        <td colspan="2"><img src="{{url('storage/images/'.$jeu->image)}}" style="margin: auto; display: block; max-width: 100%; max-height: 40vh;"></td>
+    </tr>
+    @endif
     <tr>
         <td style="width: 160px;" class="td-title">Identifiant du jeu</td>
         <td>{{$jeu->id}}</td>

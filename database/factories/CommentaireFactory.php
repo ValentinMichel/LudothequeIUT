@@ -6,7 +6,8 @@ $factory->define(
         return [
             'titre' => $faker->name,
             'body' => $faker->text,
-            'auteur' => $faker->name,
+            'auteur' => 'Valentin', // car user d'id 1 dans le Faker.
+            'auteur_id' => 1,
             'jeux_id' => random_int(DB::table('jeux')->min('id'), DB::table('jeux')->max('id')),
         ];
     }

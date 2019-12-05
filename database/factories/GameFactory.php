@@ -11,7 +11,7 @@ $factory->define(
             'annee_sortie' => $faker->year,
             'description' => $faker->text,
             'age_min' => $faker->randomElement($array = array('14+', '16+', '18+')),
-            'categorie' => $faker->randomElement($array = array('FPS', 'Open World', 'RPG', 'MMORPG', 'BattleRoyal')),
+            'categorie' => $faker->randomElement($array = array('FPS', 'Open World', 'RPG', 'MMORPG', 'BattleRoyal', 'TPS')),
         ];
     }
 );

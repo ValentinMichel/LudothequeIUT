@@ -19,7 +19,7 @@
     }
 </style>
 <div class="formulaire">
-    <form action="{{route('jeux.update',$jeu->id)}}" method="POST" style="">
+    <form action="{{route('jeux.update',$jeu->id)}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <div class="text-center">
@@ -49,33 +49,50 @@
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-4">
-                {{-- la date d'expiration  --}}
-                <label for="age_min"><strong>Âge minimum</strong></label>
-                <input type="text" class="form-control" name="age_min" id="age_min" value="{{ $jeu->age_min }}" style="text-align: center; font-weight: bold;">
+            <div class="input-group col-md-4">
+                <input type="text" class="form-control" name="age_min" id="age_min" value="{{ $jeu->age_min }}" style="text-align: center; font-weight: bold;" placeholder="Âge minimum">
             </div>
-            <div class="form-group col-md-4">
-                <label><strong>Tags</strong></label>
-                <select class="form-control" multiple="multiple" name="tags[]" style="font-weight: bold;">
-                    @php
-                        foreach ($tags as $tag){
-                            echo "<option value='".$tag->id."'".(in_array($tag->label, $currentTags) ? "selected" : "").">".$tag->label."</option>";
-                        }
-                    @endphp
-                </select>
+            <div class="input-group col-md-6">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupFileAddon01">Image du jeu</span>
+                </div>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="inputGroupFile01"
+                           aria-describedby="inputGroupFileAddon01" name="image">
+                    <label class="custom-file-label" for="inputGroupFile01">Choisir une image</label>
+                </div>
+                <!--<input type="file" class="form-control-file" name="image" id="image">-->
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-12">
+            <div class="form-group col-md-8">
                 <label for="textarea-input"><strong>Description</strong></label>
                 <textarea name="description" id="description" rows="4" class="form-control"
                           placeholder="Description..." style="font-weight: bold;">{{ $jeu->description }}</textarea>
             </div>
+            <div class="form-group col-md-4">
+                <label><strong>Tags</strong></label>
+                <select class="form-control" multiple="multiple" name="tags[]" style="font-weight: bold;">
+                    @php/*
+                        foreach ($tags as $tag){
+                            echo "<option value='".$tag->id."'".(in_array($tag->label, $currentTags) ? "selected" : "").">".$tag->label."</option>";
+                        }*/
+                    @endphp
+                    @foreach($tags as $tag)
+                        <option value="{{$tag->id}}" @if(in_array($tag->label, $currentTags)) selected @endif>{{$tag->label}}</option>
+                    @endforeach
+                </select>
+            </div>
         </div>
-        <div class="row" style="display: block;">
-            <button class="btn btn-success" type="submit" style="margin-left: 30%;">Valider la modification</button>
-            <a href="{{route('jeux.show', $jeu->id)}}"  style="margin-right: 30%;">
-                <input class="btn btn-danger" type="button" value="Annuler la modification">
+
+        <div class="row" style="display: block; margin: auto; text-align: center;">
+            <button class="btn btn-success" type="submit" style="display: inline; color: whitesmoke; text-decoration: none;">
+                Valider la modification
+            </button>
+            <a href="{{route('jeux.show', $jeu->id)}}">
+                <button class="btn btn-danger" type="button" style="display: inline; color: whitesmoke; text-decoration: none;">
+                    Annuler la modification
+                </button>
             </a>
         </div>
     </form>

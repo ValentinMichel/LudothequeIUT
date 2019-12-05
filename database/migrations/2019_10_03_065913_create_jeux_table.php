@@ -20,6 +20,7 @@ class CreateJeuxTable extends Migration
             $table->string('age_min');
             $table->string('categorie')->nullable(false);
             $table->string('description')->nullable(false);
+            $table->string('image')->nullable(true);
             $table->timestamps();
         });
     }

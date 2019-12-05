@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Commentaire;
 use App\Models\Jeux;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommentaireController extends Controller
 {
@@ -41,18 +42,27 @@ class CommentaireController extends Controller
             $request,
             [
                 'id' => 'required',
-                'title' => 'required',
-                'auteur' => 'required',
-                'commentaire' => 'required'
+                'title' => ['required', 'max:70'],
+                'auteur' => 'max:255',
+                'commentaire' => ['required', 'max:255'],
+            ],
+            [
+                'title.required' => "Le titre du commentaire doit être indiqué.",
+                'title.max' => "Le titre du commentaire ne doit pas excéder 70 caractères.",
+                'auteur.max' => "L'auteur du commentaire ne doit pas excéder 255 caractères.",
+                'commentaire.required' => "Le contenu du commentaire doit être indiqué.",
+                'commentaire.max' => "Le contenu du commentaire ne doit pas excéder 255 caractères.",
             ]
         );
+        $jeu = Jeux::find($request->id);
         $comment = new Commentaire();
         $comment->jeux_id = $request->id;
         $comment->titre = $request->title;
         $comment->auteur = $request->auteur;
         $comment->body = $request->commentaire;
+        $comment->auteur_id = $request->auteur_id;
         $comment->save();
-        return redirect('/comments/'.$request->id);
+        return redirect('/comments/'.$request->id)->with('success','Vous avez commenté le jeu '.$jeu->title.' !');
     }
 
     /**
@@ -103,7 +113,7 @@ class CommentaireController extends Controller
         if ($request->delete == 'valideFromIndex') {
             $comment = Commentaire::find($id);
             $comment->delete();
-            return redirect()->route('comments.index');
+            return redirect('/comments');
         }
         else if($request->delete == 'valideFromShow'){
             $comment = Commentaire::find($id);

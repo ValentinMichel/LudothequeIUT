@@ -98,13 +98,13 @@ class PaperPreset extends Preset
     protected static function updateAuthViews()
     {
         // Add Home controller
-        static::copyFile('app/Http/Controllers/HomeController.php', app_path('Http/Controllers/HomeController.php'));
+        static::copyFile('app/Http/Controllers/MenuController.phpphp', app_path('Http/Controllers/MenuController.phpphp'));
         static::copyFile('app/Http/Controllers/Auth/RegisterController.php', app_path('Http/Controllers/Auth/RegisterController.php'));
 
         // Add Auth routes in 'routes/web.php'
         file_put_contents(
             './routes/web.php', 
-            "Auth::routes();\n\nRoute::get('/home', 'HomeController@index')->name('home');\n\n", 
+            "Auth::routes();\n\nRoute::get('/home', 'MenuController@index')->name('home');\n\n",
             FILE_APPEND
         );
         

@@ -32,10 +32,14 @@
                 <input type="text" class="form-control" name="title" id="title" value="{{ old('title') }}" style="text-align: center; font-weight: bold;">
             </div>
         </div>
-        <div class="row" style="display: block;">
-            <button class="btn btn-success col-md-2" type="submit" style="margin-left: 33%;">Valider la création</button>
-            <a href="/tags"  style="margin-right: 33%;">
-                <input class="btn btn-danger" type="button" value="Annuler la création">
+        <div class="row" style="display: block; margin: auto; text-align: center;">
+            <button class="btn btn-success" type="submit" style="display: inline; color: whitesmoke; text-decoration: none;">
+                Valider la création
+            </button>
+            <a href="/tags">
+                <button class="btn btn-danger" type="button" style="display: inline; color: whitesmoke; text-decoration: none;">
+                    Annuler la création
+                </button>
             </a>
         </div>
     </form>

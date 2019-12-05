@@ -15,11 +15,13 @@
                 <tr>
                     <td colspan="2" style="text-align: center; font-size: larger; font-family: 'Trebuchet MS;', sans-serif">
                         Commentaire #{{$comment->id}}
+                        @if(\Illuminate\Support\Facades\Auth::user()->getAuthIdentifier() == $comment->auteur_id)
                         <form action="{{route('comments.destroy', $comment->id)}}" method="POST" style="display: inline !important;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" name="delete" value="valideFromIndex" style="background-color: white; border: none; float: right; color: rgba(255,47,56,0.71);"><i class="fas fa-times" style="float: right; color: rgba(255,47,56,0.71);"></i></button>
                         </form>
+                        @endif
                     </td>
                 </tr>
                 </thead>

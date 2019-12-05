@@ -39,13 +39,17 @@ class TagController extends Controller
         $this->validate(
             $request,
             [
-                'title' => 'required',
+                'title' => ['required','max:255']
+            ],
+            [
+                'title.required' => "Le label doit être indiqué pour créer le tag.",
+                'title.max' => "Le tag ne peut pas excéder 30 caractères."
             ]
         );
         $tag = new Tag();
         $tag->label = $request->title;
         $tag->save();
-        return redirect('/tags');
+        return redirect('/tags')->with('success','Vous avez ajouté le tag '.$request->title.' avec succès à la liste !');
     }
 
     /**
@@ -94,7 +98,7 @@ class TagController extends Controller
             $tag = Tag::find($id);
             $tag->delete();
         }
-        return redirect()->route('tags.index');
+        return redirect('/tags');
     }
 
 }

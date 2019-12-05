@@ -31,13 +31,14 @@
         </div>
         <div class="row">
             <input type="hidden" name="id" id="id" value="{{$jeu[0]->id}}" required>
+            <input type="hidden" name="auteur_id" id="auteur_id" value="{{Auth::user()->getAuthIdentifier()}}" required>
             <div class="form-group col-md-4">
                 <label for="title"><strong>Titre du commentaire</strong></label>
                 <input type="text" class="form-control" name="title" id="title" value="{{ old('title') }}" style="text-align: center; font-weight: bold;">
             </div>
             <div class="form-group col-md-4">
                 <label for="auteur"><strong>Auteur</strong></label>
-                <input type="text" class="form-control" name="auteur" id="auteur" value="{{ old('auteur') }}" style="text-align: center; font-weight: bold;">
+                <input type="text" class="form-control" name="auteur" id="auteur" value="{{Auth::user()->name}}" style="text-align: center; font-weight: bold;" readonly>
             </div>
         </div>
         <div class="row">
@@ -47,10 +48,14 @@
                           placeholder="Description..." style="font-weight: bold;">{{ old('commentaire') }}</textarea>
             </div>
         </div>
-        <div class="row" style="display: block;">
-            <button class="btn btn-success col-md-2" type="submit" style="margin-left: 33%;">Valider la création</button>
-            <a href="/jeux/{{$jeu[0]->id}}"  style="margin-right: 33%;">
-                <input class="btn btn-danger" type="button" value="Annuler la création">
+        <div class="row" style="display: block; margin: auto; text-align: center;">
+            <button class="btn btn-success" type="submit" style="display: inline; color: whitesmoke; text-decoration: none;">
+                Valider la création
+            </button>
+            <a href="/comments/{{$jeu[0]->id}}">
+                <button class="btn btn-danger" type="button" style="display: inline; color: whitesmoke; text-decoration: none;">
+                    Annuler la création
+                </button>
             </a>
         </div>
     </form>
