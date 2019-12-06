@@ -39,6 +39,25 @@
         </div>
         <!--/.Card-->
     </div>
+    <div class="mb-4 col-6">
+        <!--Card-->
+        <div class="card">
+            <div class="card-header font-weight-bold text-center text-uppercase">Guide d'utilisation</div>
+            <!--Card content-->
+            <div class="card-body">
+                <p>
+                    En accédant à l'administration, vous pouvez redéfinir le rang d'accès de chaque membre de cette application.
+                </p>
+                <div class="alert alert-info">
+                    Pour définir l'accès, il vous suffit de cliquer sur le bouton <strong>DEFAULT</strong> ou <strong>ADMIN</strong> associé à chaque utilisateur.
+                </div>
+                <div class="alert alert-danger font-weight-bold">
+                    Si vous retirez votre propre accès administrateur, vous n'aurez plus accès à ce panel d'administration !
+                </div>
+            </div>
+        </div>
+        <!--/.Card-->
+    </div>
 </div>
 
 @endsection

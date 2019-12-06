@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Commentaire;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -13,6 +14,9 @@ class User extends Authenticatable
     const DEFAULT_TYPE = 'default';
     public function isAdmin(){
         return $this->type === self::ADMIN_TYPE;
+    }
+    function comments() {
+        return $this->hasMany(Commentaire::class);
     }
     /**
      * The attributes that are mass assignable.

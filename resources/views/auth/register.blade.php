@@ -82,7 +82,7 @@
                 -->
 
                 <!-- Sign up button -->
-                <button class="btn default-color btn-block my-4" type="submit" style="color: whitesmoke; font-weight: bold;">Confirmer mon inscription</button>
+                <button class="btn default-color my-4 col-md-8" type="submit" style="color: whitesmoke; font-weight: bold;">Confirmer mon inscription</button>
                 <hr>
                 <!-- Terms of service -->
                 <p>En confirmant <em>votre inscription</em>, vous agréer à nos <a href="">conditions d'utilisation.</a>

@@ -63,4 +63,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/admin', 'AdminController@index')->middleware('is_admin')->name('admin');
 Route::get('/admin/members', 'AdminController@members')->middleware('is_admin')->name('admin.members');
-Route::post('/admin/members/update', 'AdminController@update')->name('member.update');
+Route::post('/admin/members/update', 'AdminController@update')->middleware('is_admin')->name('member.update');
