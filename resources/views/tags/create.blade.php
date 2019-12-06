@@ -19,7 +19,7 @@
     }
 </style>
 
-<div class="formulaire">
+<div class="formulaire col-md-6">
     <form action="{{route('tags.store')}}" method="POST">
         {!! csrf_field() !!}
         <div class="text-center">
@@ -27,7 +27,7 @@
             <hr class="mt-2 mb-2">
         </div>
         <div class="row">
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-12 text-center font-weight-bold">
                 <label for="title"><strong>Titre du tag</strong></label>
                 <input type="text" class="form-control" name="title" id="title" value="{{ old('title') }}" style="text-align: center; font-weight: bold;">
             </div>

@@ -51,6 +51,9 @@ Route::any('comments/create', 'CommentaireController@create')->name('comments.cr
 Route::get('comments/{id}', function (){
     return view('CommentaireController@show', '{{id}}');
 })->name('comments.show');
+Route::any('comments/{id}/edit', function (){
+    return view('CommentaireController@edit', '{{id}}');
+})->name('comments.edit');
 // Route pour TagController
 Route::get('tags', 'TagController@index')->name('tags.index');
 Route::get('tags/create', 'TagController@create')->name('tags.create');

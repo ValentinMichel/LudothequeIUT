@@ -137,9 +137,9 @@ class GameController extends Controller
         return view('jeux.show', ['jeu' => $jeu]);*/
         $action = $request->query('action', 'show');
         $jeu = Jeux::findOrFail($id); // findOrFail : si non trouvé, renvoi une erreur 404 Not Found.
-        $tags = Jeux::find($id)->tags()->get();
-
-        return view('jeux.show', ['jeu' => $jeu, 'action' => $action, 'tags' => $tags]);
+        $tags = Jeux::findOrFail($id)->tags()->get();
+        $comments = Jeux::findOrFail($id)->comments()->get()->all();
+        return view('jeux.show', ['jeu' => $jeu, 'action' => $action, 'tags' => $tags, 'comments' => $comments]);
     }
 
     /**
@@ -160,7 +160,7 @@ class GameController extends Controller
 
     public function update(Request $request, $id)
     {
-        $jeu = Jeux::find($id);
+        $jeu = Jeux::findOrFail($id);
         $this->validate(
             $request,
             [
@@ -218,7 +218,7 @@ class GameController extends Controller
     public function destroy(Request $request, $id)
     {
         if ($request->delete == 'valide') {
-            $jeu = Jeux::find($id);
+            $jeu = Jeux::findOrFail($id);
             $jeu->delete();
         }
         return redirect('/jeux');

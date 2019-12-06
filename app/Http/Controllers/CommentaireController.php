@@ -43,18 +43,19 @@ class CommentaireController extends Controller
             [
                 'id' => 'required',
                 'title' => ['required', 'max:70'],
-                'auteur' => 'max:255',
+                'auteur' => ['required', 'max:255'],
                 'commentaire' => ['required', 'max:255'],
             ],
             [
                 'title.required' => "Le titre du commentaire doit être indiqué.",
                 'title.max' => "Le titre du commentaire ne doit pas excéder 70 caractères.",
+                'auteur.required' => "L'auteur du commentaire doit être indiqué.",
                 'auteur.max' => "L'auteur du commentaire ne doit pas excéder 255 caractères.",
                 'commentaire.required' => "Le contenu du commentaire doit être indiqué.",
                 'commentaire.max' => "Le contenu du commentaire ne doit pas excéder 255 caractères.",
             ]
         );
-        $jeu = Jeux::find($request->id);
+        $jeu = Jeux::findOrFail($request->id);
         $comment = new Commentaire();
         $comment->jeux_id = $request->id;
         $comment->titre = $request->title;
@@ -62,7 +63,7 @@ class CommentaireController extends Controller
         $comment->body = $request->commentaire;
         $comment->auteur_id = $request->auteur_id;
         $comment->save();
-        return redirect('/comments/'.$request->id)->with('success','Vous avez commenté le jeu '.$jeu->title.' !');
+        return redirect('/jeux/'.$request->id)->with('success','Vous avez commenté le jeu '.$jeu->title.' !');
     }
 
     /**
@@ -74,8 +75,8 @@ class CommentaireController extends Controller
     public function show(Request $request, $id)
     {
         $action = $request->query('action', 'show');
-        $comments = Jeux::find($id)->comments()->get()->all();
-        $jeu = Jeux::find($id);
+        $comments = Jeux::findOrFail($id)->comments()->get()->all();
+        $jeu = Jeux::findOrFail($id);
         return view('comments.show', ['comments' => $comments, 'jeu' => $jeu, 'action' => $action]);
     }
 
@@ -85,9 +86,11 @@ class CommentaireController extends Controller
      * @param  \App\Models\Commentaire  $commentaire
      * @return \Illuminate\Http\Response
      */
-    public function edit(Commentaire $commentaire)
+    public function edit($id)
     {
-        //
+        $comment = Commentaire::findOrFail($id);
+        $jeu = Jeux::findOrFail($comment->jeux_id);
+        return view('comments.edit', ['comment' => $comment, 'jeu' => $jeu]);
     }
 
     /**
@@ -97,9 +100,29 @@ class CommentaireController extends Controller
      * @param  \App\Models\Commentaire  $commentaire
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Commentaire $commentaire)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate(
+            $request,
+            [
+                'title' => ['required', 'max:70'],
+                'auteur' => ['required', 'max:255'],
+                'commentaire' => ['required', 'max:255'],
+            ],
+            [
+                'title.required' => "Le titre du commentaire doit être indiqué.",
+                'title.max' => "Le titre du commentaire ne doit pas excéder 70 caractères.",
+                'auteur.max' => "L'auteur du commentaire ne doit pas excéder 255 caractères.",
+                'commentaire.required' => "Le contenu du commentaire doit être indiqué.",
+                'commentaire.max' => "Le contenu du commentaire ne doit pas excéder 255 caractères.",
+            ]
+        );
+        $comment = Commentaire::findOrFail($id);
+        $jeu = Jeux::findOrFail($comment->jeux_id);
+        $comment->titre = $request->title;
+        $comment->body = $request->commentaire;
+        $comment->save();
+        return redirect('/jeux/'.$jeu->id)->with('success', 'Vous avez édité votre commentaire sur '.$jeu->title);
     }
 
     /**
@@ -111,12 +134,12 @@ class CommentaireController extends Controller
     public function destroy(Request $request, $id)
     {
         if ($request->delete == 'valideFromIndex') {
-            $comment = Commentaire::find($id);
+            $comment = Commentaire::findOrFail($id);
             $comment->delete();
             return redirect('/comments');
         }
         else if($request->delete == 'valideFromShow'){
-            $comment = Commentaire::find($id);
+            $comment = Commentaire::findOrFail($id);
             $comment->delete();
             return redirect()->back();
         }

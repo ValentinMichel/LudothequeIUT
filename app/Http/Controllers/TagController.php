@@ -95,7 +95,7 @@ class TagController extends Controller
     public function destroy(Request $request, $id)
     {
         if ($request->delete == 'valide') {
-            $tag = Tag::find($id);
+            $tag = Tag::findOrFail($id);
             $tag->delete();
         }
         return redirect('/tags');

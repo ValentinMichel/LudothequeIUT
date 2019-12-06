@@ -27,6 +27,10 @@
             height: 100vh;
             margin: 0;
         }
+        td>a{
+            color: teal !important;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>

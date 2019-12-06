@@ -49,6 +49,9 @@
         </div>
         <div class="row">
             <div class="input-group col-md-4">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupFileAddon01">Âge requis</span>
+                </div>
                 <input type="text" class="form-control" name="age_min" id="age_min" value="{{ old('age_min') }}" style="text-align: center; font-weight: bold;" placeholder="Âge minimum">
             </div>
             <div class="input-group col-md-6">

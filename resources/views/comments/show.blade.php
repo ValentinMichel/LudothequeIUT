@@ -26,13 +26,20 @@
                 <tr>
                     <td colspan="2" style="text-align: center; font-size: larger; font-family: 'Trebuchet MS;', sans-serif">
                         Commentaire #{{$comment->id}}
+                        @auth
                         @if(\Illuminate\Support\Facades\Auth::user()->getAuthIdentifier() == $comment->auteur_id)
                         <form action="{{route('comments.destroy', [$comment->id])}}" method="POST" style="display: inline !important;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" name="delete" value="valideFromShow" style="background-color: white; border: none; float: right; color: rgba(255,47,56,0.71);"><i class="fas fa-times" style="float: right; color: rgba(255,47,56,0.71);"></i></button>
+                            <button type="submit" name="delete" class="float-right" value="valideFromShow" style="padding-right: 2%; background-color: white; border: none; color: rgba(255,47,56,0.71);"><i class="fas fa-times" style="color: rgba(255,47,56,0.71);"></i></button>
                         </form>
+                        <div class="float-left" style="padding-left: 2%;">
+                            <a href="{{route('comments.edit', $comment->id)}}">
+                                <i class="fas fa-edit" style="color: rgba(255,116,55,0.71);"></i>
+                            </a>
+                        </div>
                         @endif
+                        @endauth
                     </td>
                 </tr>
                 </thead>
@@ -50,8 +57,14 @@
                 </tr>
                 <tr>
                     <td style="width: 160px;" class="td-title">Publié le</td>
-                    <td>{{$comment->updated_at}}</td>
+                    <td>{{$comment->created_at->format('l jS \\of F Y h:i:s A')}}</td>
                 </tr>
+                @if($comment->created_at != $comment->updated_at)
+                <tr>
+                    <td style="width: 160px;" class="td-title">Édité le</td>
+                    <td>{{$comment->updated_at->format('l jS \\of F Y h:i:s A')}}</td>
+                </tr>
+                @endif
             </table>
         @endforeach
     @else

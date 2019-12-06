@@ -1,5 +1,5 @@
 <!--Navbar-->
-<nav class="navbar navbar-expand-lg navbar-dark default-color">
+<nav class="navbar navbar-expand-lg navbar-dark default-color font-weight-bold">
 
     <!-- Navbar brand -->
     <a class="navbar-brand" href="/">Ludothèque</a>
@@ -41,15 +41,15 @@
 
         </ul>
         <!-- Links -->
-    </div>
+
     <!-- Collapsible content -->
     @if (Route::has('login'))
-    <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
         <ul class="navbar-nav ml-auto">
             @auth
                 @if(Auth::user()->isAdmin())
-                    <li class="nav-item" style="padding-right: 5%;">
-                        <a class="nav-link font-weight-bold btn-teal" href="{{route('admin')}}">Administration
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('admin')}}">
+                            <i class="fas fa-user-shield" style="display: inline; margin-right: 1%;"></i>Administration
                         </a>
                     </li>
                 @endif
@@ -81,6 +81,6 @@
                 @endif
             @endauth
         </ul>
-    </div>
     @endif
+    </div>
 </nav>
