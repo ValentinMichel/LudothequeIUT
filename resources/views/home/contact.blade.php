@@ -88,7 +88,7 @@
                 <button class="btn btn-success" type="submit" style="display: inline; color: whitesmoke; text-decoration: none;">
                     Envoyer le message
                 </button>
-                <a href="/">
+                <a href="{{route('home')}}">
                     <button class="btn btn-danger" type="button" style="display: inline; color: whitesmoke; text-decoration: none;">
                         Retour
                     </button>

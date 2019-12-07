@@ -52,7 +52,7 @@
             <button class="btn btn-success" type="submit" style="display: inline; color: whitesmoke; text-decoration: none;">
                 Valider la création
             </button>
-            <a href="/comments/{{$jeu[0]->id}}">
+            <a href="{{route('jeux.show', $jeu[0]->id)}}">
                 <button class="btn btn-danger" type="button" style="display: inline; color: whitesmoke; text-decoration: none;">
                     Annuler la création
                 </button>

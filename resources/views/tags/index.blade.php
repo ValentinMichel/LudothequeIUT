@@ -29,12 +29,12 @@
         <h3>Aucun tag répertorié</h3>
     @endif
     <div class="row" style="display: block; margin: auto; margin-bottom: 3%; text-align: center;">
-        <a href="/tags/create" style="text-decoration: none;">
+        <a href="{{route('tags.create')}}" style="text-decoration: none;">
             <button class="btn btn-success" type="button" style="display: inline; color: whitesmoke; text-decoration: none;">
                 Ajouter
             </button>
         </a>
-        <a href="/" style="text-decoration: none;">
+        <a href="{{route('home')}}" style="text-decoration: none;">
             <button class="btn btn-info" type="button" style="display: inline; color: whitesmoke; text-decoration: none;">
                 Accueil
             </button>

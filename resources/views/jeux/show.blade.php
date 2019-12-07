@@ -66,11 +66,11 @@
             </div>
         </form>
     @else
-        <a href="/jeux"><button class="btn btn-info font-weight-bold">Retour</button></a>
+        <a href="{{route('jeux.index')}}"><button class="btn btn-info font-weight-bold">Retour</button></a>
         <a href="{{route('comments.show', $jeu->id)}}"><button class="btn btn-primary font-weight-bold">Voir les commentaires</button></a>
-        <a href="/comments/create?id={{$jeu->id}}"><button class="btn btn-success font-weight-bold">Ajouter un commentaire</button></a>
-        <a href="/jeux/{{$jeu->id}}/edit"><button class="btn btn-warning white-text font-weight-bold" style="color: darkslategray;">Éditer</button></a>
-        <a href="/jeux/{{$jeu->id}}?action=delete"><button class="btn btn-danger font-weight-bold">Supprimer</button></a>
+        <a href="{{route('comments.create')}}?id={{$jeu->id}}"><button class="btn btn-success font-weight-bold">Ajouter un commentaire</button></a>
+        <a href="{{route('jeux.edit', $jeu->id)}}"><button class="btn btn-warning white-text font-weight-bold" style="color: darkslategray;">Éditer</button></a>
+        <a href="{{route('jeux.show', $jeu->id)}}?action=delete"><button class="btn btn-danger font-weight-bold">Supprimer</button></a>
         <!--<a href="{{url(route('jeux.show', $jeu->id)) . '?' . http_build_query(['action' => 'delete'])}}"><button class="btn btn-danger">Supprimer le jeu</button></a>-->
     @endif
     <!-- Modif du 6 décembre -->

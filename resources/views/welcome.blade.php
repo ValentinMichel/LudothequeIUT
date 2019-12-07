@@ -88,8 +88,8 @@
                     <a href="{{route('jeux.index')}}">Liste des jeux</a>
                     <a href="{{route('comments.index')}}">Liste des commentaires</a>
                     <a href="{{route('tags.index')}}">Liste des tags</a>
-                    <a href="{{route('/apropos')}}">About</a>
-                    <a href="{{route('/contact')}}">Contact us</a>
+                    <a href="{{route('home.apropos')}}">About</a>
+                    <a href="{{route('home.contact')}}">Contact us</a>
                 </div>
             </div>
         </div>

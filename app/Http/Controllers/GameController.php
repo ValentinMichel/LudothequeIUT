@@ -94,7 +94,7 @@ class GameController extends Controller
         foreach ($request->tags as $tag){
             $jeu->tags()->attach($tag);
         }
-        return redirect('/jeux')->with('success','Création du jeu effectuée avec succès !');
+        return redirect(route('jeux.index'))->with('success','Création du jeu effectuée avec succès !');
     }
     public function upload(Request $request) {
         if ($request->hasFile('image')  && $request->file('image')->isValid()) {
@@ -206,7 +206,7 @@ class GameController extends Controller
                 $jeu->tags()->detach($tag);
             }
         }
-        return redirect('/jeux/'.$id)->with('success','Edition du jeu effectuée avec succès !');
+        return redirect(route('jeux.index', $id))->with('success','Edition du jeu '.$jeu->title.' effectuée avec succès !');
     }
 
     /**
@@ -221,7 +221,7 @@ class GameController extends Controller
             $jeu = Jeux::findOrFail($id);
             $jeu->delete();
         }
-        return redirect('/jeux');
+        return redirect(route('jeux.index'))->with('info', 'Jeu supprimé avec succès.');
     }
 
 }

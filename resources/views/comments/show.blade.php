@@ -71,9 +71,9 @@
         <h5 style="text-align: center; color: rgb(218, 43, 14);">Aucun commentaire pour ce jeu actuellement.</h5>
     @endif
     <div class="backToPage">
-        <a href="/jeux"><button class="btn btn-info">Retour à la liste des jeux</button></a>
-        <a href="/jeux/{{$jeu->id}}"><button class="btn btn-primary">Voir le jeu</button></a>
-        <a href="/comments/create?id={{$jeu->id}}"><button class="btn btn-success">Ajouter un commentaire</button></a>
+        <a href="{{route('jeux.index')}}"><button class="btn btn-info">Retour à la liste des jeux</button></a>
+        <a href="{{route('jeux.show', $jeu->id)}}"><button class="btn btn-primary">Voir le jeu</button></a>
+        <a href="{{route('comments.create')}}?id={{$jeu->id}}"><button class="btn btn-success">Ajouter un commentaire</button></a>
     </div>
 </div>
 @endsection

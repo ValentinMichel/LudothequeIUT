@@ -1,7 +1,7 @@
 @extends("layout.master")
 @section("title", "{$jeu->title}")
 @section("content")
-    @if(Auth::user()->getAuthIdentifier() === $comment->auteur_id)
+    @if(Auth::user()->getAuthIdentifier() == $comment->auteur_id)
         <style>
             .formulaire{
                 margin-top: 2%;
@@ -49,7 +49,7 @@
                     <button class="btn btn-success" type="submit" style="display: inline; color: whitesmoke; text-decoration: none;">
                         Valider la modification
                     </button>
-                    <a href="/comments/{{$jeu->id}}">
+                    <a href="{{route('jeux.show', $jeu->id)}}">
                         <button class="btn btn-danger" type="button" style="display: inline; color: whitesmoke; text-decoration: none;">
                             Annuler la modification
                         </button>

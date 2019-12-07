@@ -76,11 +76,6 @@
             <div class="form-group col-md-4">
                 <label><strong>Tags</strong></label>
                 <select class="form-control" multiple="multiple" name="tags[]" style="font-weight: bold;">
-                    @php/*
-                        foreach ($tags as $tag){
-                            echo "<option value='".$tag->id."'".(in_array($tag->label, $currentTags) ? "selected" : "").">".$tag->label."</option>";
-                        }*/
-                    @endphp
                     @foreach($tags as $tag)
                         <option value="{{$tag->id}}" @if(in_array($tag->label, $currentTags)) selected @endif>{{$tag->label}}</option>
                     @endforeach

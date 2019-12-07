@@ -54,7 +54,7 @@
     </div>
 </div>
 <div class="row" style="display: block; margin: auto; margin-bottom: 3%; text-align: center;">
-    <a href="/">
+    <a href="{{route('home')}}">
         <button class="btn btn-info" type="button" style="display: inline; color: whitesmoke; text-decoration: none;">
             Accueil
         </button>

@@ -63,7 +63,7 @@ class CommentaireController extends Controller
         $comment->body = $request->commentaire;
         $comment->auteur_id = $request->auteur_id;
         $comment->save();
-        return redirect('/jeux/'.$request->id)->with('success','Vous avez commenté le jeu '.$jeu->title.' !');
+        return redirect(route('jeux.show', $request->id))->with('success','Vous avez commenté le jeu '.$jeu->title.' !');
     }
 
     /**
@@ -122,7 +122,7 @@ class CommentaireController extends Controller
         $comment->titre = $request->title;
         $comment->body = $request->commentaire;
         $comment->save();
-        return redirect('/jeux/'.$jeu->id)->with('success', 'Vous avez édité votre commentaire sur '.$jeu->title);
+        return redirect(route('jeux.show', $jeu->id))->with('success', 'Vous avez édité votre commentaire sur '.$jeu->title);
     }
 
     /**
@@ -136,12 +136,12 @@ class CommentaireController extends Controller
         if ($request->delete == 'valideFromIndex') {
             $comment = Commentaire::findOrFail($id);
             $comment->delete();
-            return redirect('/comments');
+            return redirect(route('comments.index'))->with('info', 'Le commentaire a été supprimé.');
         }
         else if($request->delete == 'valideFromShow'){
             $comment = Commentaire::findOrFail($id);
             $comment->delete();
-            return redirect()->back();
+            return redirect()->back()->with('info', 'Le commentaire a été supprimé.');
         }
     }
 

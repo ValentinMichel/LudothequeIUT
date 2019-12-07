@@ -74,12 +74,6 @@
             <div class="form-group col-md-4">
                 <label><strong>Tags</strong></label>
                 <select class="form-control" multiple="multiple" name="tags[]" style="font-weight: bold;">
-                    @php/*
-                        if(!is_null(old('tags'))) $tab = old('tags');
-                        foreach ($tags as $tag){
-                            echo "<option value='".$tag->id."'".(isset($tab) ? (in_array($tag->id, $tab) ? "selected" : "") : "").">".$tag->label."</option>";
-                        }*/
-                    @endphp
                     @foreach($tags as $tag)
                         <option value="{{$tag->id}}" @if(!is_null(old('tags')) && in_array($tag->id, old('tags'))) selected @endif>{{$tag->label}}</option>
                     @endforeach
@@ -91,7 +85,7 @@
             <button class="btn btn-success" type="submit" style="display: inline; color: whitesmoke; text-decoration: none;">
                 Valider la création
             </button>
-            <a href="/jeux">
+            <a href="{{route('jeux.index')}}">
                 <button class="btn btn-danger" type="button" style="display: inline; color: whitesmoke; text-decoration: none;">
                     Annuler la création
                 </button>

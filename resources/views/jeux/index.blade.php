@@ -16,7 +16,7 @@
 </style>
 <h2 style="text-align: center; width: 100%; margin-top: 2%; text-transform: uppercase;">La liste des jeux</h2>
 @if(!empty($jeux))
-    <form action="/jeux" method="get" class="header-select">
+    <form action="{{route('jeux.index')}}" method="get" class="header-select">
         <select class="form-control col-md-7" name="categorie" style="display: inline;">
             <option value="All" @if($type == 'All') selected @endif>Tous les types</option>
             @foreach($categories as $categorie)
@@ -45,8 +45,7 @@
                 <td>{{$jeu->age_min}}</td>
                 <td>{{$jeu->categorie}}</td>
                 <td>{{$jeu->description}}</td>
-                <!--<td><a href="{{route('jeux.show', $jeu->id)}}">Voir la fiche</a></td>-->
-                <td><a href="/jeux/{{$jeu->id}}">Voir la fiche</a></td>
+                <td><a href="{{route('jeux.show', $jeu->id)}}">Voir la fiche</a></td>
             </tr>
         @endforeach
     </table>
@@ -54,12 +53,12 @@
     <h3>Aucun jeu répertorié</h3>
     @endif
 <div class="row" style="display: block; margin: auto; margin-bottom: 3%; text-align: center;">
-    <a href="/jeux/create">
+    <a href="{{route('jeux.create')}}">
         <button class="btn btn-success" type="button" style="display: inline; color: whitesmoke; text-decoration: none;">
             Créer un jeu
         </button>
     </a>
-    <a href="/">
+    <a href="{{route('home')}}">
         <button class="btn btn-info" type="button" style="display: inline; color: whitesmoke; text-decoration: none;">
             Accueil
         </button>

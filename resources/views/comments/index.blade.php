@@ -50,7 +50,7 @@
                 </tr>
                 <tr>
                     <td style="width: 160px;" class="td-title">Lié au jeu n°</td>
-                    <td>{{$comment->jeux_id}} <a href="/jeux/{{$comment->jeux_id}}">(voir le jeu)</a></td>
+                    <td>{{$comment->jeux_id}} <a href="{{route('jeux.show', $comment->jeux_id)}}">(voir le jeu)</a></td>
                 </tr>
             </table>
         @endforeach
@@ -58,7 +58,7 @@
         <h3>Aucun commentaire répertorié</h3>
     @endif
     <div class="row" style="display: block; margin: auto; margin-bottom: 3%; text-align: center;">
-        <a href="/">
+        <a href="{{route('home')}}">
             <button class="btn btn-info" type="button" style="display: inline; color: whitesmoke; text-decoration: none;">
                 Accueil
             </button>

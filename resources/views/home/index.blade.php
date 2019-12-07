@@ -59,11 +59,11 @@
         </div>
 
         <div class="links">
-            <a href="/jeux">Liste des jeux</a>
-            <a href="/comments">Liste des commentaires</a>
-            <a href="/tags">Liste des tags</a>
-            <a href="/apropos">About</a>
-            <a href="/contact">Contact us</a>
+            <a href="{{route('jeux.index')}}">Liste des jeux</a>
+            <a href="{{route('comments.index')}}">Liste des commentaires</a>
+            <a href="{{route('tags.index')}}">Liste des tags</a>
+            <a href="{{route('home.about')}}">About</a>
+            <a href="{{route('home.contact')}}">Contact us</a>
         </div>
         <div style="margin-top: 2%; font-size: 20px;">
             Site de l'application Ludothèque de l'IUT de Lens.

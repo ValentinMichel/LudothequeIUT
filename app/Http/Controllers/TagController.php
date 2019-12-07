@@ -49,7 +49,7 @@ class TagController extends Controller
         $tag = new Tag();
         $tag->label = $request->title;
         $tag->save();
-        return redirect('/tags')->with('success','Vous avez ajouté le tag '.$request->title.' avec succès à la liste !');
+        return redirect(route('tags.index'))->with('success','Vous avez ajouté le tag '.$request->title.' avec succès à la liste !');
     }
 
     /**
@@ -98,7 +98,7 @@ class TagController extends Controller
             $tag = Tag::findOrFail($id);
             $tag->delete();
         }
-        return redirect('/tags');
+        return redirect(route('tags.index'))->with('info', 'Tag supprimé avec succès.');
     }
 
 }
