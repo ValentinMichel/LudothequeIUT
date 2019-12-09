@@ -206,7 +206,7 @@ class GameController extends Controller
                 $jeu->tags()->detach($tag);
             }
         }
-        return redirect(route('jeux.index', $id))->with('success','Edition du jeu '.$jeu->title.' effectuée avec succès !');
+        return redirect(route('jeux.show', $id))->with('success','Edition du jeu '.$jeu->title.' effectuée avec succès !');
     }
 
     /**
